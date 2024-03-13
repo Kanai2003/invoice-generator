@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import LabeledInput from './LabeledInput';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
