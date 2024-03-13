@@ -6,8 +6,10 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(cors({
-    credentials: true
-}))
+    origin: '*',
+    credentials: true,
+  }));
+  
 
 app.use(express.json());
 app.use(cookieParser());
