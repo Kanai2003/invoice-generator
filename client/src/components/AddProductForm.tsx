@@ -37,7 +37,7 @@ const AddProductPage: React.FC = () => {
         console.log(products)
         try {
             const response = await axios.post(
-                `http://localhost:4000/api/v1/product/invoice`,
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/product/invoice`,
                 { products: products },
                 { responseType: 'blob', withCredentials: true }
             )
