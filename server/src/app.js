@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 app.use(cors({
-    origin: 'https://invoice-generator-black.vercel.app',
+    origin: ['https://invoice-generator-black.vercel.app', '*', 'https://invoice-generator-black.vercel.app/*'],
     credentials: true,
   }));
   
