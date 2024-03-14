@@ -7,10 +7,8 @@ import productRoutes from "./routes/product.routes.js";
 const app = express();
 
 
-
-const allowedOrigins = [ 'https://invoice-generator-nzno-tau.vercel.app','https://invoice-generator-nzno-git-main-kanailalmanna.vercel.app', "*"];
 app.use(cors({
-  origin: allowedOrigins,
+  origin: process.env.CORS_ORIGIN,
   credentials: true, 
 }));
 
