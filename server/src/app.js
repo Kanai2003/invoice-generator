@@ -8,7 +8,7 @@ const app = express();
 
 
 
-const allowedOrigins = ['http://localhost:5173', 'https://invoice-generator-black.vercel.app', "*"];
+const allowedOrigins = [ 'invoice-generator-nzno-tau.vercel.app','invoice-generator-nzno-git-main-kanailalmanna.vercel.app', "*"];
 app.use(cors({
   origin: allowedOrigins,
   credentials: true, 
