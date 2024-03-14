@@ -55,7 +55,8 @@ export const loginUser = asyncHandler(async (req, res) => {
         .cookie("token", loggedInuser.generateAuthToken(), options)
         .json({
             "message": "User logged in successfully",
-            "user": loggedInuser
+            "user": loggedInuser,
+            "token": loggedInuser.generateAuthToken()
         })
 })
 

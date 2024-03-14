@@ -48,6 +48,7 @@ const LoginForm: React.FC = () => {
                 { email: formData.email, password: formData.password },
                 { withCredentials: true }
             )
+            localStorage.setItem('token', response.data.token)
             console.log(response)
 
             dispatch(login(response.data))

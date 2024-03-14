@@ -76,3 +76,8 @@ Frontend:
 https://invoice-generator-two-pied.vercel.app
 
 Backend: https://nice-rose-seal-shoe.cyclic.app
+
+
+
+## Generated PDF: 
+[pdf sample](./invoice.pdf)

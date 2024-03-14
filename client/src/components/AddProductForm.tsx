@@ -36,10 +36,18 @@ const AddProductPage: React.FC = () => {
     const handleGenerateInvoice = async () => {
         console.log(products)
         try {
+            const token = localStorage.getItem('token');
+            // console.log('Token:', token);
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER_URL}/api/v1/product/invoice`,
                 { products: products },
-                {  responseType:'blob' ,withCredentials: true }
+                {
+                    responseType: 'blob',
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
             )
             console.log(response)
 
@@ -63,76 +71,76 @@ const AddProductPage: React.FC = () => {
 
     return (
         <div className='flex flex-col  items-center'>
-        <div className="p-4 rounded-lg bg-indigo-950 text-white flex flex-col sm:flex-row w-full justify-evenly">
-            <div className='p-4 w-full sm:w-5/12 flex flex-col items-center'>
-                <form className="space-y-6 w-full">
-                    <LabeledInput
-                        label="Product Name"
-                        name="productName"
-                        type="text"
-                        value={productName}
-                        onChange={(e) => setProductName(e.target.value)}
-                        required
-                    />
-                    <LabeledInput
-                        label="Product Quantity"
-                        name="productQty"
-                        type="number"
-                        value={productQty}
-                        onChange={(e) => setProductQty(e.target.value)}
-                        required
-                    />
-                    <LabeledInput
-                        label="Product Rate"
-                        name="productRate"
-                        type="number"
-                        value={productRate}
-                        onChange={(e) => setProductRate(e.target.value)}
-                        required
-                    />
-                    <div>
+            <div className="p-4 rounded-lg bg-indigo-950 text-white flex flex-col sm:flex-row w-full justify-evenly">
+                <div className='p-4 w-full sm:w-5/12 flex flex-col items-center'>
+                    <form className="space-y-6 w-full">
+                        <LabeledInput
+                            label="Product Name"
+                            name="productName"
+                            type="text"
+                            value={productName}
+                            onChange={(e) => setProductName(e.target.value)}
+                            required
+                        />
+                        <LabeledInput
+                            label="Product Quantity"
+                            name="productQty"
+                            type="number"
+                            value={productQty}
+                            onChange={(e) => setProductQty(e.target.value)}
+                            required
+                        />
+                        <LabeledInput
+                            label="Product Rate"
+                            name="productRate"
+                            type="number"
+                            value={productRate}
+                            onChange={(e) => setProductRate(e.target.value)}
+                            required
+                        />
+                        <div>
+                            <button
+                                type="button"
+                                onClick={handleAddProduct}
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Add Product
+                            </button>
+                        </div>
                         <button
                             type="button"
-                            onClick={handleAddProduct}
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            onClick={handleGenerateInvoice}
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-4"
                         >
-                            Add Product
+                            Generate PDF Invoice
                         </button>
-                    </div>
-                    <button
-                        type="button"
-                        onClick={handleGenerateInvoice}
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-4"
-                    >
-                        Generate PDF Invoice
-                    </button>
-                </form>
-            </div>
-            <div className="w-full sm:w-5/12">
-                <h2 className="text-lg font-bold">Added Products</h2>
-                <table className="mt-2 w-full">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Rate {` (₹)`}</th>
-                            <th>Total {` (₹)`}</th>
-                            <th>GST {` (₹)`}</th>
-                        </tr>
-                    </thead>
-                    <tbody className='text-center'>
-                        {products.map((product, index) => (
-                            <tr key={index}>
-                                <td>{product.name}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.price}</td>
-                                <td><strong>{product.quantity * product.price}</strong></td>
-                                <td>{(product.quantity * product.price * 0.18).toFixed(2)}</td>
-                            </tr>   
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                    </form>
+                </div>
+                <div className="w-full sm:w-5/12">
+                    <h2 className="text-lg font-bold">Added Products</h2>
+                    <table className="mt-2 w-full">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Rate {` (₹)`}</th>
+                                <th>Total {` (₹)`}</th>
+                                <th>GST {` (₹)`}</th>
+                            </tr>
+                        </thead>
+                        <tbody className='text-center'>
+                            {products.map((product, index) => (
+                                <tr key={index}>
+                                    <td>{product.name}</td>
+                                    <td>{product.quantity}</td>
+                                    <td>{product.price}</td>
+                                    <td><strong>{product.quantity * product.price}</strong></td>
+                                    <td>{(product.quantity * product.price * 0.18).toFixed(2)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             {/* <div> */}
             {pdfUrl && (
